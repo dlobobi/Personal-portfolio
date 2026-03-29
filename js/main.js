@@ -46,6 +46,10 @@ requestAnimationFrame(raf);
 
 // 3. Initialize GSAP Scroll Animations (Fade elements up as you scroll)
 gsap.registerPlugin(ScrollTrigger);
+
+//FIX - MOBILE JUMP
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 gsap.utils.toArray('.gsap-fade-up').forEach(element => {
     gsap.from(element, {
         scrollTrigger: { trigger: element, start: "top 85%" },
