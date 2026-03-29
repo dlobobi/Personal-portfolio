@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
         // First visit: Show the mail loader, then reveal the site
         setTimeout(() => {
             if(loader) loader.classList.add('hide-loader');
-            if(body) body.classList.remove('overflow-hidden');
+            if(body) body.classList.remove('overflow-y-hidden');
             if(mainContent) mainContent.classList.remove('opacity-0');
 
             triggerGSAPAnimations();
@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
     } else {
         // Already visited: Hide the loader instantly, no waiting
         if(loader) loader.style.display = 'none';
-        if(body) body.classList.remove('overflow-hidden');
+        if(body) body.classList.remove('overflow-y-hidden');
         if(mainContent) mainContent.classList.remove('opacity-0');
 
         triggerGSAPAnimations();
