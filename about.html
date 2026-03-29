@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Bozhidar Chobanov</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { bgDark: '#0a0a0c', surface: 'rgba(255, 255, 255, 0.03)', surfaceBorder: 'rgba(255, 255, 255, 0.08)' }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-bgDark text-gray-300 font-sans antialiased overflow-hidden" id="body">
+
+<div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bgDark">
+    <div class="loader-icon mb-4"></div>
+    <p class="font-mono text-sm tracking-widest text-gray-400 uppercase">Fetching Assets...</p>
+</div>
+
+<nav class="fixed top-0 w-full z-40 glass px-6 py-4 flex justify-between items-center mix-blend-difference">
+    <div class="font-mono font-bold text-white tracking-tighter text-xl"><a href="index.html">BC</a></div>
+    <div class="space-x-8 text-sm font-medium hidden md:block">
+        <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
+        <a href="about.html" class="text-white border-b border-white pb-1">About</a>
+        <a href="index.html#arcade" class="text-gray-400 hover:text-white transition">Arcade</a>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-6 pt-32 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 relative opacity-0 transition-opacity duration-1000" id="main-content">
+
+    <div class="lg:col-span-4 relative">
+        <div class="sticky top-32 glass rounded-2xl p-8 gsap-stagger">
+            <div class="w-32 h-32 bg-surfaceBorder rounded-full mb-6 overflow-hidden border-2 border-surfaceBorder">
+                <img src="assets/profile.jpeg" alt="Bozhidar Chobanov" class="object-cover object-top w-full h-full grayscale hover:grayscale-0 transition duration-500">
+            </div>
+            <h1 class="text-3xl font-bold text-white tracking-tight mb-2">Bozhidar Chobanov</h1>
+            <p class="text-indigo-400 font-mono text-sm mb-6">Full-Stack IoT & ACS Student</p>
+            <p class="text-gray-400 text-sm mb-8">Antwerp region, Belgium.</p>
+
+            <a href="assets/CV.pdf" target="_blank" class="w-full block text-center px-6 py-3 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-200 transition">
+                Download Resumé
+            </a>
+        </div>
+    </div>
+
+    <div class="lg:col-span-8 space-y-16">
+
+        <section class="gsap-fade-up">
+            <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Professional Experience</h2>
+            <div class="mb-8">
+                <div class="flex justify-between items-baseline mb-2">
+                    <h3 class="text-xl text-indigo-300 font-medium">Student Software Developer</h3>
+                    <span class="font-mono text-sm text-gray-500">Oct 2025 - Present</span>
+                </div>
+                <p class="text-white font-medium mb-4">Olpas (Turnhout, Hybrid)</p>
+                <p class="text-gray-400 leading-relaxed mb-4">
+                    At Olpas, I manage responsibilities across the entire IoT stack. I am tasked with ensuring high reliability for a global sensor network. My key achievements include:
+                </p>
+                <ul class="list-disc text-gray-400 space-y-2 text-sm leading-relaxed">
+                    <li>Developing browser-based tools to configure and read sensor data via the Modbus protocol using JS, HTML, and CSS.</li>
+                    <li>Securing live production VPS environments (running Docker and Nginx) using Fail2Ban and Tailscale VPN to mitigate bot traffic.</li>
+                    <li>Automating backend workflows by writing Python scripts to query the InfluxDB API, replacing manual workflows for CSV reporting.</li>
+                    <li>Diagnosing server crashes and writing robust backend logic to handle malformed MQTT payloads.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="gsap-fade-up">
+            <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Education & Trajectory</h2>
+            <div class="mb-8">
+                <h3 class="text-xl text-white font-medium mb-2">Applied Computer Science</h3>
+                <p class="text-indigo-300 mb-4">Thomas More (Second Year)</p>
+                <p class="text-gray-400 leading-relaxed mb-4">
+                    My academic journey has built a strong foundation in system architecture, Object-Oriented Development (Java), Operating Systems, and Web Development.
+                </p>
+                <p class="text-gray-400 leading-relaxed">
+                    The Roadmap: I am currently on track to graduate with an Artificial Intelligence specialization, with an upcoming focus on Software Design and Architecture in my third year. Ultimately, my goal is to merge my DevSecOps experience and AI knowledge into a specialized career in Cybersecurity, building intelligent, impenetrable systems.
+                </p>
+            </div>
+        </section>
+
+        <section class="gsap-fade-up">
+            <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Off-Screen</h2>
+            <div class="mb-8">
+                <h3 class="text-xl text-white font-medium mb-4">BBC Geel Basketball</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    When I step away from the IDE, I play competitive basketball for BBC Geel. I'm a versatile utility player, comfortable in all five positions, prioritizing playmaking, and always willing to do the "dirty work" like diving for loose balls or locking down on defense when everyone else is exhausted.
+                </p>
+                <p class="text-gray-400 leading-relaxed mt-4">
+                    That exact mindset translates to my code: I'm a team-first developer who steps up to fix the stubborn bugs, secures the vulnerable servers, and goes the extra mile to deliver the win.
+                </p>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
