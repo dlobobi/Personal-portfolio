@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Bozhidar Chobanov</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { bgDark: '#0a0a0c', surface: 'rgba(255, 255, 255, 0.03)', surfaceBorder: 'rgba(255, 255, 255, 0.08)' }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-bgDark text-gray-300 font-sans antialiased overflow-x-hidden w-full relative" id="body">
+
+<nav class="fixed top-0 w-full z-40 glass px-5 md:px-6 py-4 flex justify-between items-center mix-blend-difference">
+    <div class="font-mono font-bold text-white tracking-tighter text-lg md:text-xl"><a href="index.html">BC</a></div>
+    <div class="flex space-x-5 md:space-x-8 text-xs md:text-sm font-medium">
+        <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
+        <a href="about.html" class="text-gray-400 hover:text-white transition">About</a>
+        <a href="projects.html" class="text-white border-b border-white pb-1">Projects</a>
+    </div>
+</nav>
+
+<main class="max-w-5xl mx-auto px-6 pt-32 pb-24 relative" id="main-content">
+
+    <div class="text-center mb-20 gsap-hero">
+        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">Achievements & Builds</h1>
+        <p class="text-gray-400 max-w-2xl mx-auto">A showcase of academic coursework and personal development projects demonstrating my ability to architect, build, and deploy software solutions.</p>
+    </div>
+
+    <div class="space-y-16">
+
+        <article class="glass rounded-2xl p-8 md:p-10 border border-surfaceBorder gsap-fade-up">
+            <h2 class="text-2xl font-bold text-white mb-2">Household Management System (Andersons' Family)</h2>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="text-xs font-mono text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded">Subject: SKIL2 (Semester 1)</span>
+                <span class="text-xs font-mono text-gray-400 bg-surface border border-surfaceBorder px-2 py-1 rounded">Group Work</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 items-center">
+                <div>
+                    <h3 class="text-lg text-white font-medium mb-2">Context & Background</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        For the first semester of the Skill Integration Lab (SKIL2), we were tasked with acting as IT consultants for an internal client (represented by our professors). The client, the Anderson family, required a digital solution to overcome challenges related to coordination, staff scheduling, and expense tracking. The goal of this ECTS subject was to master the requirements analysis and software design phase before writing any code.
+                    </p>
+                    <h3 class="text-lg text-white font-medium mb-2">Realisations & Role</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        We developed a comprehensive final analysis document and a functional prototype design. My role involved translating real-life client problems into structured Use Case Diagrams, defining functional and non-functional requirements, and creating data models. We also utilized Figma to design the user interface, prioritizing features using the MoSCoW method to ensure the final system would effectively support daily household operations.
+                    </p>
+                    <h3 class="text-lg text-white font-medium mb-2">Skills Gained</h3>
+                    <ul class="text-gray-400 text-sm space-y-1">
+                        <li><span class="text-indigo-500 mr-2">▹</span> Hard Skills: UML/Use Case Diagrams, Data Modeling, Figma Prototyping, Requirements Engineering.</li>
+                        <li><span class="text-indigo-500 mr-2">▹</span> Soft Skills: Client communication, Agile/Scrum methodology, ethical analysis of IT systems.</li>
+                    </ul>
+                </div>
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
+                    <img src="assets/figma-uml.png" alt="Figma and UML projects" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                </div>
+            </div>
+        </article>
+
+        <article class="glass rounded-2xl p-8 md:p-10 border border-surfaceBorder gsap-fade-up">
+            <h2 class="text-2xl font-bold text-white mb-2">Grow Gym Web Application</h2>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="text-xs font-mono text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded">Subject: SKIL2 (Semester 2)</span>
+                <span class="text-xs font-mono text-gray-400 bg-surface border border-surfaceBorder px-2 py-1 rounded">In Progress / Group Work</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 items-center">
+                <div>
+                    <h3 class="text-lg text-white font-medium mb-2">Context & Background</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        For the second semester of SKIL2, we transitioned from design to development. Our client is "Grow", a newly founded hybrid gym in Kesterlee. The founder currently manages scheduling and payments manually via Instagram, causing severe administrative inefficiencies. Our goal is to build a centralized web platform that digitizes customer profiles, automates session bookings with live availability, and provides access to nutrition plans.
+                    </p>
+                    <h3 class="text-lg text-white font-medium mb-2">Realisations & Role</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        We are currently building the proof-of-concept utilizing the architecture and Figma designs prepared prior to this phase. I am actively involved in developing the web application using Laravel 12, Alpine.js, and Livewire, styled with Tailwind CSS. My ongoing responsibilities include translating the data models into a functional database, implementing user registration, and setting up the live session booking logic on a Cornbell hosting environment.
+                    </p>
+                    <h3 class="text-lg text-white font-medium mb-2">Skills Gained</h3>
+                    <ul class="text-gray-400 text-sm space-y-1">
+                        <li><span class="text-indigo-500 mr-2">▹</span> Hard Skills: PHP 8, Laravel 12, Livewire, Alpine.js, Tailwind CSS, Web Hosting/Deployment.</li>
+                        <li><span class="text-indigo-500 mr-2">▹</span> Soft Skills: Technical presentation, substantiating code choices to a client, group cooperation.</li>
+                    </ul>
+                </div>
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
+                    <img src="assets/laravel-dashboard.png" alt="Laravel Dashboard - Project" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                </div>
+            </div>
+        </article>
+
+        <article class="glass rounded-2xl p-8 md:p-10 border border-surfaceBorder gsap-fade-up">
+            <h2 class="text-2xl font-bold text-white mb-2">Olpas Sensor Configuration & Calibration Tools</h2>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="text-xs font-mono text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded">Category: Professional (Olpas)</span>
+                <span class="text-xs font-mono text-gray-400 bg-surface border border-surfaceBorder px-2 py-1 rounded">Lead Developer</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 items-center">
+                <div>
+                    <h3 class="text-lg text-white font-medium mb-2">Context & Background</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Olpas required offline-capable, browser-based applications to allow field technicians to configure and calibrate industrial sensors via USB. Because the hardware relies on the Modbus RTU protocol (limited to 16-bit integers), there was a critical need for a mathematical bridge between human-readable decimals and rigid machine code to prevent hardware crashes.
+                    </p>
+                    <h3 class="text-lg text-white font-medium mb-2">Realisations & Role</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        As the lead developer, I overhauled the architecture and core mathematical engines. I transformed the UI into a dynamic JavaScript engine driven by a centralized SENSOR_REGISTRY. I also engineered a custom algorithm (`encodeModbusFloat`) that dynamically translates massive integers and floating-point decimals into 4-register Modbus Scientific Notation. Additionally, I built an offline simulator using `localStorage` for safe testing and authored the technical documentation.
+                    </p>
+                    <h3 class="text-lg text-white font-medium mb-2">Skills Gained</h3>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li class="flex items-start"><span class="text-indigo-500 mr-2 mt-0.5">▹</span> <span><strong>Hard Skills:</strong> JavaScript, Offline SPA Architecture, Web Serial API, Modbus RTU Memory Management, Linear Regression Algorithms.</span></li>
+                        <li class="flex items-start"><span class="text-indigo-500 mr-2 mt-0.5">▹</span> <span><strong>Soft Skills:</strong> UI/UX Empathy for field technicians, autonomous edge-case debugging, translating complex math into maintainable documentation.</span></li>
+                    </ul>
+                </div>
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
+                    <a href="https://dashboard.olpas.tech/tool.html#" target="_blank"> <img src="assets/olpas-app.png" alt="Olpas Calibration App" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500"> </a>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass rounded-2xl p-8 md:p-10 border border-surfaceBorder gsap-fade-up">
+            <h2 class="text-2xl font-bold text-white mb-2">IoT Dashboards & Gateway Infrastructure</h2>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="text-xs font-mono text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded">Category: Professional (Olpas)</span>
+                <span class="text-xs font-mono text-gray-400 bg-surface border border-surfaceBorder px-2 py-1 rounded">Systems Administrator</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 items-center">
+                <div>
+                    <h3 class="text-lg text-white font-medium mb-2">Context & Background</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Olpas required a secure, high-performing data ingestion platform to monitor their IoT sensor fleets. The objective was to maintain a reliable telemetry pipeline while actively optimizing the existing server architecture to handle long-term data storage efficiently, ensure high system availability, and protect against external threats without interrupting live sensor data.
+                    </p>
+
+                    <h3 class="text-lg text-white font-medium mb-2">Realisations & Role</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Taking over an existing containerized backend stack (Docker, Mosquitto, Node-RED, InfluxDB, Grafana), I served as the Systems Administrator managing critical infrastructure. My key realizations included:
+                    </p>
+                    <ul class="text-gray-400 text-sm space-y-3 mb-4">
+                        <li class="flex items-start">
+                            <span class="text-indigo-500 mr-2 mt-0.5">▹</span>
+                            <span><strong>Security & Networking:</strong> Hardened the Linux server using standard firewall utilities (UFW) and bot defenses (Fail2Ban). Resolved internal Docker routing conflicts to bypass public SSL traps and diagnosed UDP packet drops to ensure data integrity.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-500 mr-2 mt-0.5">▹</span>
+                            <span><strong>Database Optimization:</strong>  Eliminated severe Grafana latency by cleaning up InfluxDB, engineering a strict 6-month data retention
+          policy, and implementing automated database exports. </span>
+                        <li class="flex items-start">
+                            <span class="text-indigo-500 mr-2 mt-0.5">▹</span>
+                            <span><strong>System Health & Reliability:</strong> Conducted deep-dive investigations into server resource allocation to diagnose abnormal data consumption and high usage spikes, optimizing backend performance to prevent bottlenecks during peak telemetry ingestion.</span>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-lg text-white font-medium mb-2">Skills Gained</h3>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-indigo-500 mr-2 mt-0.5">▹</span>
+                            <span><strong>Hard Skills:</strong> Linux Server Resource Management, InfluxDB Lifecycle/Retention Policies, Security (UFW, Fail2Ban), Docker Subnets, MQTT/Node-RED pipelines.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-500 mr-2 mt-0.5">▹</span>
+                            <span><strong>Soft Skills:</strong> Proactive Resource Optimization, Lifecycle Management, Technical Writing for internal Wikis, Scientific-method Troubleshooting.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
+                    <img src="assets/olpas-dashboard.png" alt="Olpas Grafana Dashboard" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                </div>
+            </div>
+        </article>
+
+    </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

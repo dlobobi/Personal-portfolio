@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-bgDark text-gray-300 font-sans antialiased overflow-x-hidden overflow-y-hidden w-full relative" id="body">
+<body class="bg-bgDark text-gray-300 font-sans antialiased overflow-x-hidden w-full relative" id="body">
 
 <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bgDark">
     <div class="loader-icon mb-4"></div>
@@ -34,7 +34,7 @@
     <div class="flex space-x-5 md:space-x-8 text-xs md:text-sm font-medium">
         <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
         <a href="about.html" class="text-white border-b border-white pb-1">About</a>
-        <a href="index.html#arcade" class="text-gray-400 hover:text-white transition hidden sm:inline-block">Arcade</a>
+        <a href="projects.html" class="text-gray-400 hover:text-white transition">Projects</a>
     </div>
 </nav>
 
@@ -49,8 +49,11 @@
             <p class="text-indigo-400 font-mono text-sm mb-6">Full-Stack IoT & ACS Student</p>
             <p class="text-gray-400 text-sm mb-8">Antwerp region, Belgium.</p>
 
-            <a href="assets/CV.pdf" target="_blank" class="w-full block text-center px-6 py-3 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-200 transition">
-                Download Resumé
+            <a href="cv.html" class="w-full block text-center px-6 py-3 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-200 transition mb-3">
+                View Resumé
+            </a>
+            <a href="assets/CV.pdf" download="CV_Bozhidar_Chobanov.pdf" class="w-full block text-center px-6 py-3 border border-surfaceBorder text-white text-sm font-medium rounded-lg hover:bg-white/5 transition">
+                Download PDF
             </a>
         </div>
     </div>
@@ -60,35 +63,19 @@
         <section class="gsap-fade-up">
             <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Professional Experience</h2>
             <div class="mb-8">
-
                 <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2 gap-1 md:gap-4">
                     <h3 class="text-xl text-white font-medium leading-tight">Student Software Developer</h3>
                     <span class="font-mono text-sm text-gray-500 shrink-0">Oct 2025 - Present</span>
                 </div>
-
                 <p class="text-indigo-300 font-medium mb-5">Olpas <span class="text-gray-500 font-normal ml-1">(Turnhout, Hybrid)</span></p>
-
                 <p class="text-gray-400 leading-relaxed mb-5">
                     At Olpas, I manage responsibilities across the entire IoT stack. I am tasked with ensuring high reliability for a global sensor network. My key achievements include:
                 </p>
-
                 <ul class="space-y-4 text-gray-400 text-sm leading-relaxed">
-                    <li class="flex items-start">
-                        <span class="text-indigo-500 mr-3 mt-0.5">▹</span>
-                        <span>Developing browser-based tools to configure and read sensor data via the Modbus protocol using JS, HTML, and CSS.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-indigo-500 mr-3 mt-0.5">▹</span>
-                        <span>Securing live production VPS environments (running Docker and Nginx) using Fail2Ban and Tailscale VPN to mitigate bot traffic.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-indigo-500 mr-3 mt-0.5">▹</span>
-                        <span>Automating backend workflows by writing Python scripts to query the InfluxDB API, replacing manual workflows for CSV reporting.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-indigo-500 mr-3 mt-0.5">▹</span>
-                        <span>Diagnosing server crashes and writing robust backend logic to handle malformed MQTT payloads.</span>
-                    </li>
+                    <li class="flex items-start"><span class="text-indigo-500 mr-3 mt-0.5">▹</span><span>Developing browser-based tools to configure and read sensor data via the Modbus protocol using JS, HTML, and CSS.</span></li>
+                    <li class="flex items-start"><span class="text-indigo-500 mr-3 mt-0.5">▹</span><span>Securing live production VPS environments (running Docker and Nginx) using Fail2Ban and Tailscale VPN to mitigate bot traffic.</span></li>
+                    <li class="flex items-start"><span class="text-indigo-500 mr-3 mt-0.5">▹</span><span>Automating backend workflows by writing Python scripts to query the InfluxDB API, replacing manual workflows for CSV reporting.</span></li>
+                    <li class="flex items-start"><span class="text-indigo-500 mr-3 mt-0.5">▹</span><span>Diagnosing server crashes and writing robust backend logic to handle malformed MQTT payloads.</span></li>
                 </ul>
             </div>
         </section>
@@ -96,14 +83,48 @@
         <section class="gsap-fade-up">
             <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Education & Trajectory</h2>
             <div class="mb-8">
-                <h3 class="text-xl text-white font-medium mb-2">Applied Computer Science</h3>
-                <p class="text-indigo-300 mb-4">Thomas More Geel <span class="text-gray-500 font-normal ml-1">(Second Year)</span></p>
+                <h3 class="text-xl text-white font-medium mb-2">Why Applied Computer Science?</h3>
+                <p class="text-gray-400 leading-relaxed mb-6">
+                    I chose Applied Computer Science because I wanted to understand exactly how the software we use daily interacts with the hardware that powers it. I am driven by the logic of building systems from the ground up, moving past theoretical concepts and diving straight into hands-on implementation and robust architecture.
+                </p>
+
+                <h3 class="text-xl text-white font-medium mb-2">Thomas More Geel <span class="text-gray-500 font-normal ml-1 text-sm">(Second Year)</span></h3>
                 <p class="text-gray-400 leading-relaxed mb-4">
                     My academic journey has built a strong foundation in system architecture, Object-Oriented Development (Java), Operating Systems, and Web Development.
                 </p>
                 <p class="text-gray-400 leading-relaxed">
-                    The Roadmap: I am currently on track to graduate with an Artificial Intelligence specialization, with an upcoming focus on Software Design and Architecture in my third year. Ultimately, my goal is to merge my DevSecOps experience and AI knowledge into a specialized career in Cybersecurity, building intelligent, impenetrable systems.
+                    <strong>The Roadmap & Ambitions:</strong> I am currently on track to graduate with an Artificial Intelligence specialization, with an upcoming focus on Software Design and Architecture in my third year. Ultimately, my professional ambition is to merge my DevSecOps experience and AI knowledge into a specialized career in <strong>Cybersecurity</strong>, designing intelligent, impenetrable infrastructure.
                 </p>
+            </div>
+        </section>
+
+        <section class="gsap-fade-up">
+            <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Capabilities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg text-indigo-300 font-medium mb-4 font-mono">> Hard_Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Java</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Python</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">JavaScript</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">HTML/CSS</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">React</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Laravel / PHP</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Docker</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Nginx / Server Config</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">InfluxDB</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">IoT / Modbus</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg text-indigo-300 font-medium mb-4 font-mono">> Soft_Skills</h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">▹</span> Rapid Problem-Solving</li>
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">▹</span> Cross-functional Teamwork</li>
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">▹</span> Adaptability under pressure</li>
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">▹</span> Clear Technical Communication</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -126,7 +147,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-
 <script src="js/main.js"></script>
 </body>
 </html>

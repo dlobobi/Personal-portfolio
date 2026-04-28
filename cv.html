@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumé | Bozhidar Chobanov</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { bgDark: '#0a0a0c', surface: 'rgba(255, 255, 255, 0.03)', surfaceBorder: 'rgba(255, 255, 255, 0.08)' }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-bgDark text-gray-300 font-sans antialiased overflow-hidden">
+
+<nav class="fixed top-0 w-full z-40 glass px-5 md:px-6 py-4 flex justify-between items-center mix-blend-difference">
+    <div class="font-mono font-bold text-white tracking-tighter text-lg md:text-xl"><a href="index.html">BC</a></div>
+    <div class="flex space-x-5 md:space-x-8 text-xs md:text-sm font-medium">
+        <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
+        <a href="about.html" class="text-white border-b border-white pb-1">About</a>
+        <a href="projects.html" class="text-gray-400 hover:text-white transition">Projects</a>
+    </div>
+</nav>
+
+<main class="h-screen w-full pt-20 px-4 pb-4">
+    <div class="w-full h-full glass rounded-xl overflow-hidden border border-surfaceBorder">
+        <iframe src="assets/CV.pdf" class="w-full h-full border-none"></iframe>
+    </div>
+</main>
+
+</body>
+</html>
