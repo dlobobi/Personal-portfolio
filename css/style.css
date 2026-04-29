@@ -204,6 +204,26 @@ nav .text-white {
     nav {
         padding-top: 1.25rem !important;
         padding-bottom: 1.25rem !important;
+        mix-blend-mode: normal !important;
+        background: var(--bg-color) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid var(--surface-border) !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 50 !important;
+    }
+
+    nav .text-white, 
+    nav .text-textWhite,
+    nav a {
+        color: var(--text-white) !important;
+    }
+
+    nav .text-textMuted {
+        color: var(--text-muted) !important;
     }
     
     nav .flex.space-x-5 {
