@@ -10,31 +10,51 @@
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
-                    colors: { bgDark: '#0a0a0c', surface: 'rgba(255, 255, 255, 0.03)', surfaceBorder: 'rgba(255, 255, 255, 0.08)' }
+                    colors: { 
+                        bgDark: 'var(--bg-color)', 
+                        surface: 'var(--surface)', 
+                        surfaceBorder: 'var(--surface-border)',
+                        textWhite: 'var(--text-white)',
+                        textMuted: 'var(--text-muted)',
+                        textBody: 'var(--text-color)'
+                    }
                 }
             }
         }
     </script>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/bobicon.ico">
 </head>
-<body class="bg-bgDark text-gray-300 font-sans antialiased overflow-x-hidden w-full relative" id="body">
+<body class="bg-bgDark text-textBody font-sans antialiased overflow-x-hidden w-full relative" id="body">
 
 <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bgDark">
     <div class="loader-icon mb-4"></div>
-    <p class="font-mono text-sm tracking-widest text-gray-400 uppercase">Fetching Assets...</p>
+    <p class="font-mono text-sm tracking-widest text-textMuted uppercase">Fetching Assets...</p>
 </div>
 
 <nav class="fixed top-0 w-full z-40 glass px-5 md:px-6 py-4 flex justify-between items-center mix-blend-difference">
     <div class="font-mono font-bold text-white tracking-tighter text-lg md:text-xl"><a href="index.html">BC</a></div>
 
-    <div class="flex space-x-5 md:space-x-8 text-xs md:text-sm font-medium">
-        <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
-        <a href="about.html" class="text-white border-b border-white pb-1">About</a>
-        <a href="projects.html" class="text-gray-400 hover:text-white transition">Projects</a>
+    <div class="flex items-center space-x-5 md:space-x-8">
+        <div class="flex space-x-5 md:space-x-8 text-xs md:text-sm font-medium">
+            <a href="index.html" class="text-textMuted hover:text-textWhite transition">Home</a>
+            <a href="about.html" class="text-textWhite border-b border-textWhite pb-1">About</a>
+            <a href="projects.html" class="text-textMuted hover:text-textWhite transition">Projects</a>
+        </div>
+        
+        <button id="theme-toggle" class="theme-toggle text-white" aria-label="Toggle Theme">
+            <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+        </button>
     </div>
 </nav>
 
@@ -45,14 +65,14 @@
             <div class="w-32 h-32 bg-surfaceBorder rounded-full mb-6 overflow-hidden border-2 border-surfaceBorder">
                 <img src="assets/profile.jpeg" alt="Bozhidar Chobanov" class="object-cover object-top w-full h-full grayscale hover:grayscale-0 transition duration-500">
             </div>
-            <h1 class="text-3xl font-bold text-white tracking-tight mb-2">Bozhidar Chobanov</h1>
+            <h1 class="text-3xl font-bold text-textWhite tracking-tight mb-2">Bozhidar Chobanov</h1>
             <p class="text-indigo-400 font-mono text-sm mb-6">Full-Stack IoT & ACS Student</p>
-            <p class="text-gray-400 text-sm mb-8">Antwerp region, Belgium.</p>
+            <p class="text-textMuted text-sm mb-8">Antwerp region, Belgium.</p>
 
-            <a href="cv.html" class="w-full block text-center px-6 py-3 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-200 transition mb-3">
+            <a href="cv.html" class="w-full block text-center px-6 py-3 bg-textWhite text-bgDark text-sm font-medium rounded-lg hover:opacity-90 transition mb-3">
                 View Resumé
             </a>
-            <a href="assets/CV.pdf" download="CV_Bozhidar_Chobanov.pdf" class="w-full block text-center px-6 py-3 border border-surfaceBorder text-white text-sm font-medium rounded-lg hover:bg-white/5 transition">
+            <a href="assets/CV.pdf" download="CV_Bozhidar_Chobanov.pdf" class="w-full block text-center px-6 py-3 border border-surfaceBorder text-textWhite text-sm font-medium rounded-lg hover:bg-white/5 transition">
                 Download PDF
             </a>
         </div>
@@ -61,17 +81,17 @@
     <div class="lg:col-span-8 space-y-16">
 
         <section class="gsap-fade-up">
-            <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Professional Experience</h2>
+            <h2 class="text-2xl text-textWhite font-semibold mb-6 border-b border-surfaceBorder pb-4">Professional Experience</h2>
             <div class="mb-8">
                 <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2 gap-1 md:gap-4">
-                    <h3 class="text-xl text-white font-medium leading-tight">Student Software Developer</h3>
-                    <span class="font-mono text-sm text-gray-500 shrink-0">Oct 2025 - Present</span>
+                    <h3 class="text-xl text-textWhite font-medium leading-tight">Student Software Developer</h3>
+                    <span class="font-mono text-sm text-textMuted shrink-0">Oct 2025 - Present</span>
                 </div>
-                <p class="text-indigo-300 font-medium mb-5">Olpas <span class="text-gray-500 font-normal ml-1">(Turnhout, Hybrid)</span></p>
-                <p class="text-gray-400 leading-relaxed mb-5">
+                <p class="text-indigo-300 font-medium mb-5">Olpas <span class="text-textMuted font-normal ml-1">(Turnhout, Hybrid)</span></p>
+                <p class="text-textMuted leading-relaxed mb-5">
                     At Olpas, I manage responsibilities across the entire IoT stack. I am tasked with ensuring high reliability for a global sensor network. My key achievements include:
                 </p>
-                <ul class="space-y-4 text-gray-400 text-sm leading-relaxed">
+                <ul class="space-y-4 text-textMuted text-sm leading-relaxed">
                     <li class="flex items-start"><span class="text-indigo-500 mr-3 mt-0.5">▹</span><span>Developing browser-based tools to configure and read sensor data via the Modbus protocol using JS, HTML, and CSS.</span></li>
                     <li class="flex items-start"><span class="text-indigo-500 mr-3 mt-0.5">▹</span><span>Securing live production VPS environments (running Docker and Nginx) using Fail2Ban and Tailscale VPN to mitigate bot traffic.</span></li>
                     <li class="flex items-start"><span class="text-indigo-500 mr-3 mt-0.5">▹</span><span>Automating backend workflows by writing Python scripts to query the InfluxDB API, replacing manual workflows for CSV reporting.</span></li>
@@ -81,44 +101,44 @@
         </section>
 
         <section class="gsap-fade-up">
-            <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Education & Trajectory</h2>
+            <h2 class="text-2xl text-textWhite font-semibold mb-6 border-b border-surfaceBorder pb-4">Education & Trajectory</h2>
             <div class="mb-8">
-                <h3 class="text-xl text-white font-medium mb-2">Why Applied Computer Science?</h3>
-                <p class="text-gray-400 leading-relaxed mb-6">
+                <h3 class="text-xl text-textWhite font-medium mb-2">Why Applied Computer Science?</h3>
+                <p class="text-textMuted leading-relaxed mb-6">
                     I chose Applied Computer Science because I wanted to understand exactly how the software we use daily interacts with the hardware that powers it. I am driven by the logic of building systems from the ground up, moving past theoretical concepts and diving straight into hands-on implementation and robust architecture.
                 </p>
 
-                <h3 class="text-xl text-white font-medium mb-2">Thomas More Geel <span class="text-gray-500 font-normal ml-1 text-sm">(Second Year)</span></h3>
-                <p class="text-gray-400 leading-relaxed mb-4">
+                <h3 class="text-xl text-textWhite font-medium mb-2">Thomas More Geel <span class="text-textMuted font-normal ml-1 text-sm">(Second Year)</span></h3>
+                <p class="text-textMuted leading-relaxed mb-4">
                     My academic journey has built a strong foundation in system architecture, Object-Oriented Development (Java), Operating Systems, and Web Development.
                 </p>
-                <p class="text-gray-400 leading-relaxed">
+                <p class="text-textMuted leading-relaxed">
                     <strong>The Roadmap & Ambitions:</strong> I am currently on track to graduate with an Artificial Intelligence specialization, with an upcoming focus on Software Design and Architecture in my third year. Ultimately, my professional ambition is to merge my DevSecOps experience and AI knowledge into a specialized career in <strong>Cybersecurity</strong>, designing intelligent, impenetrable infrastructure.
                 </p>
             </div>
         </section>
 
         <section class="gsap-fade-up">
-            <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Capabilities</h2>
+            <h2 class="text-2xl text-textWhite font-semibold mb-6 border-b border-surfaceBorder pb-4">Capabilities</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                     <h3 class="text-lg text-indigo-300 font-medium mb-4 font-mono">> Hard_Skills</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Java</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Python</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">JavaScript</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">HTML/CSS</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">React</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Laravel / PHP</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Docker</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">Nginx / Server Config</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">InfluxDB</span>
-                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-gray-300">IoT / Modbus</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">Java</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">Python</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">JavaScript</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">HTML/CSS</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">React</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">Laravel / PHP</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">Docker</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">Nginx / Server Config</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">InfluxDB</span>
+                        <span class="px-3 py-1 bg-surface border border-surfaceBorder rounded text-sm text-textBody">IoT / Modbus</span>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-lg text-indigo-300 font-medium mb-4 font-mono">> Soft_Skills</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-textMuted text-sm">
                         <li class="flex items-center"><span class="text-indigo-500 mr-2">▹</span> Rapid Problem-Solving</li>
                         <li class="flex items-center"><span class="text-indigo-500 mr-2">▹</span> Cross-functional Teamwork</li>
                         <li class="flex items-center"><span class="text-indigo-500 mr-2">▹</span> Adaptability under pressure</li>
@@ -129,13 +149,13 @@
         </section>
 
         <section class="gsap-fade-up">
-            <h2 class="text-2xl text-white font-semibold mb-6 border-b border-surfaceBorder pb-4">Off-Screen</h2>
+            <h2 class="text-2xl text-textWhite font-semibold mb-6 border-b border-surfaceBorder pb-4">Off-Screen</h2>
             <div class="mb-8">
-                <h3 class="text-xl text-white font-medium mb-4">BBC Geel Basketball</h3>
-                <p class="text-gray-400 leading-relaxed">
+                <h3 class="text-xl text-textWhite font-medium mb-4">BBC Geel Basketball</h3>
+                <p class="text-textMuted leading-relaxed">
                     When I step away from the IDE, I play competitive basketball for BBC Geel. I'm a versatile utility player, comfortable in all five positions, prioritizing playmaking, and always willing to do the "dirty work" like diving for loose balls or locking down on defense when everyone else is exhausted.
                 </p>
-                <p class="text-gray-400 leading-relaxed mt-4">
+                <p class="text-textMuted leading-relaxed mt-4">
                     That exact mindset translates to my code: I'm a team-first developer who steps up to fix the stubborn bugs, secures the vulnerable servers, and goes the extra mile to deliver the win.
                 </p>
             </div>

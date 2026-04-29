@@ -1,3 +1,32 @@
+// 0. Theme Toggle Logic
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+
+// Function to apply the theme
+function applyTheme(theme) {
+    if (theme === 'light') {
+        htmlElement.classList.add('light');
+    } else {
+        htmlElement.classList.remove('light');
+    }
+}
+
+// Check for saved theme or system preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    applyTheme(savedTheme);
+} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+    applyTheme('light');
+}
+
+// Handle theme toggle click
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const isLight = htmlElement.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+}
+
 // 1. Loading Screen & Initial Animations
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader');

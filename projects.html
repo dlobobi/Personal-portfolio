@@ -8,142 +8,188 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
-                    colors: { bgDark: '#0a0a0c', surface: 'rgba(255, 255, 255, 0.03)', surfaceBorder: 'rgba(255, 255, 255, 0.08)' }
+                    colors: { 
+                        bgDark: 'var(--bg-color)', 
+                        surface: 'var(--surface)', 
+                        surfaceBorder: 'var(--surface-border)',
+                        textWhite: 'var(--text-white)',
+                        textMuted: 'var(--text-muted)',
+                        textBody: 'var(--text-color)'
+                    }
                 }
             }
         }
     </script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/bobicon.ico">
 </head>
-<body class="bg-bgDark text-gray-300 font-sans antialiased overflow-x-hidden w-full relative" id="body">
+<body class="bg-bgDark text-textBody font-sans antialiased overflow-x-hidden w-full relative" id="body">
+
+<!-- Lightbox Modal -->
+<div id="lightbox">
+    <span id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Popup Image">
+    <div id="lightbox-controls">
+        <div id="lightbox-prev" class="lightbox-btn">← Previous</div>
+        <div id="lightbox-next" class="lightbox-btn">Next →</div>
+    </div>
+</div>
 
 <nav class="fixed top-0 w-full z-40 glass px-5 md:px-6 py-4 flex justify-between items-center mix-blend-difference">
     <div class="font-mono font-bold text-white tracking-tighter text-lg md:text-xl"><a href="index.html">BC</a></div>
-    <div class="flex space-x-5 md:space-x-8 text-xs md:text-sm font-medium">
-        <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
-        <a href="about.html" class="text-gray-400 hover:text-white transition">About</a>
-        <a href="projects.html" class="text-white border-b border-white pb-1">Projects</a>
+    
+    <div class="flex items-center space-x-5 md:space-x-8">
+        <div class="flex space-x-5 md:space-x-8 text-xs md:text-sm font-medium">
+            <a href="index.html" class="text-textMuted hover:text-textWhite transition">Home</a>
+            <a href="about.html" class="text-textMuted hover:text-textWhite transition">About</a>
+            <a href="projects.html" class="text-textWhite border-b border-textWhite pb-1">Projects</a>
+        </div>
+
+        <button id="theme-toggle" class="theme-toggle text-white" aria-label="Toggle Theme">
+            <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+        </button>
     </div>
 </nav>
 
 <main class="max-w-5xl mx-auto px-6 pt-32 pb-24 relative" id="main-content">
 
     <div class="text-center mb-20 gsap-hero">
-        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">Achievements & Builds</h1>
-        <p class="text-gray-400 max-w-2xl mx-auto">A showcase of academic coursework and personal development projects demonstrating my ability to architect, build, and deploy software solutions.</p>
+        <h1 class="text-4xl md:text-5xl font-bold text-textWhite tracking-tight mb-4">Achievements & Builds</h1>
+        <p class="text-textMuted max-w-2xl mx-auto">A showcase of academic coursework and personal development projects demonstrating my ability to architect, build, and deploy software solutions.</p>
     </div>
 
     <div class="space-y-16">
 
         <article class="glass rounded-2xl p-8 md:p-10 border border-surfaceBorder gsap-fade-up">
-            <h2 class="text-2xl font-bold text-white mb-2">Household Management System (Andersons' Family)</h2>
+            <h2 class="text-2xl font-bold text-textWhite mb-2">Household Management System (Andersons' Family)</h2>
             <div class="flex flex-wrap gap-3 mb-6">
                 <span class="text-xs font-mono text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded">Subject: SKIL2 (Semester 1)</span>
-                <span class="text-xs font-mono text-gray-400 bg-surface border border-surfaceBorder px-2 py-1 rounded">Group Work</span>
+                <span class="text-xs font-mono text-textMuted bg-surface border border-surfaceBorder px-2 py-1 rounded">Group Work</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 items-center">
                 <div>
-                    <h3 class="text-lg text-white font-medium mb-2">Context & Background</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Context & Background</h3>
+                    <p class="text-textMuted text-sm leading-relaxed mb-4">
                         For the first semester of the Skill Integration Lab (SKIL2), we were tasked with acting as IT consultants for an internal client (represented by our professors). The client, the Anderson family, required a digital solution to overcome challenges related to coordination, staff scheduling, and expense tracking. The goal of this ECTS subject was to master the requirements analysis and software design phase before writing any code.
                     </p>
-                    <h3 class="text-lg text-white font-medium mb-2">Realisations & Role</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Realisations & Role</h3>
+                    <p class="text-textMuted text-sm leading-relaxed mb-4">
                         We developed a comprehensive final analysis document and a functional prototype design. My role involved translating real-life client problems into structured Use Case Diagrams, defining functional and non-functional requirements, and creating data models. We also utilized Figma to design the user interface, prioritizing features using the MoSCoW method to ensure the final system would effectively support daily household operations.
                     </p>
-                    <h3 class="text-lg text-white font-medium mb-2">Skills Gained</h3>
-                    <ul class="text-gray-400 text-sm space-y-1">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Skills Gained</h3>
+                    <ul class="text-textMuted text-sm space-y-1">
                         <li><span class="text-indigo-500 mr-2">▹</span> Hard Skills: UML/Use Case Diagrams, Data Modeling, Figma Prototyping, Requirements Engineering.</li>
                         <li><span class="text-indigo-500 mr-2">▹</span> Soft Skills: Client communication, Agile/Scrum methodology, ethical analysis of IT systems.</li>
                     </ul>
                 </div>
-                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer" onclick="openGallery(['assets/project1-1.png', 'assets/project1-2.png', 'assets/project1-3.png'])">
                     <img src="assets/figma-uml.png" alt="Figma and UML projects" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                        <span class="text-white font-mono text-xs border border-white px-3 py-1 rounded-full">View Gallery (3)</span>
+                    </div>
                 </div>
             </div>
         </article>
 
         <article class="glass rounded-2xl p-8 md:p-10 border border-surfaceBorder gsap-fade-up">
-            <h2 class="text-2xl font-bold text-white mb-2">Grow Gym Web Application</h2>
+            <h2 class="text-2xl font-bold text-textWhite mb-2">Grow Gym Web Application</h2>
             <div class="flex flex-wrap gap-3 mb-6">
                 <span class="text-xs font-mono text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded">Subject: SKIL2 (Semester 2)</span>
-                <span class="text-xs font-mono text-gray-400 bg-surface border border-surfaceBorder px-2 py-1 rounded">In Progress / Group Work</span>
+                <span class="text-xs font-mono text-textMuted bg-surface border border-surfaceBorder px-2 py-1 rounded">In Progress / Group Work</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 items-center">
                 <div>
-                    <h3 class="text-lg text-white font-medium mb-2">Context & Background</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Context & Background</h3>
+                    <p class="text-textMuted text-sm leading-relaxed mb-4">
                         For the second semester of SKIL2, we transitioned from design to development. Our client is "Grow", a newly founded hybrid gym in Kesterlee. The founder currently manages scheduling and payments manually via Instagram, causing severe administrative inefficiencies. Our goal is to build a centralized web platform that digitizes customer profiles, automates session bookings with live availability, and provides access to nutrition plans.
                     </p>
-                    <h3 class="text-lg text-white font-medium mb-2">Realisations & Role</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Realisations & Role</h3>
+                    <p class="text-textMuted text-sm leading-relaxed mb-4">
                         We are currently building the proof-of-concept utilizing the architecture and Figma designs prepared prior to this phase. I am actively involved in developing the web application using Laravel 12, Alpine.js, and Livewire, styled with Tailwind CSS. My ongoing responsibilities include translating the data models into a functional database, implementing user registration, and setting up the live session booking logic on a Cornbell hosting environment.
                     </p>
-                    <h3 class="text-lg text-white font-medium mb-2">Skills Gained</h3>
-                    <ul class="text-gray-400 text-sm space-y-1">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Skills Gained</h3>
+                    <ul class="text-textMuted text-sm space-y-1">
                         <li><span class="text-indigo-500 mr-2">▹</span> Hard Skills: PHP 8, Laravel 12, Livewire, Alpine.js, Tailwind CSS, Web Hosting/Deployment.</li>
                         <li><span class="text-indigo-500 mr-2">▹</span> Soft Skills: Technical presentation, substantiating code choices to a client, group cooperation.</li>
                     </ul>
                 </div>
-                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer" onclick="openLightbox('assets/laravel-dashboard.png')">
                     <img src="assets/laravel-dashboard.png" alt="Laravel Dashboard - Project" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                        <span class="text-white font-mono text-xs border border-white px-3 py-1 rounded-full">Enlarge Image</span>
+                    </div>
                 </div>
             </div>
         </article>
 
         <article class="glass rounded-2xl p-8 md:p-10 border border-surfaceBorder gsap-fade-up">
-            <h2 class="text-2xl font-bold text-white mb-2">Olpas Sensor Configuration & Calibration Tools</h2>
+            <h2 class="text-2xl font-bold text-textWhite mb-2">Olpas Sensor Configuration & Calibration Tools</h2>
             <div class="flex flex-wrap gap-3 mb-6">
                 <span class="text-xs font-mono text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded">Category: Professional (Olpas)</span>
-                <span class="text-xs font-mono text-gray-400 bg-surface border border-surfaceBorder px-2 py-1 rounded">Lead Developer</span>
+                <span class="text-xs font-mono text-textMuted bg-surface border border-surfaceBorder px-2 py-1 rounded">Lead Developer</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 items-center">
                 <div>
-                    <h3 class="text-lg text-white font-medium mb-2">Context & Background</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Context & Background</h3>
+                    <p class="text-textMuted text-sm leading-relaxed mb-4">
                         Olpas required offline-capable, browser-based applications to allow field technicians to configure and calibrate industrial sensors via USB. Because the hardware relies on the Modbus RTU protocol (limited to 16-bit integers), there was a critical need for a mathematical bridge between human-readable decimals and rigid machine code to prevent hardware crashes.
                     </p>
-                    <h3 class="text-lg text-white font-medium mb-2">Realisations & Role</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Realisations & Role</h3>
+                    <p class="text-textMuted text-sm leading-relaxed mb-4">
                         As the lead developer, I overhauled the architecture and core mathematical engines. I transformed the UI into a dynamic JavaScript engine driven by a centralized SENSOR_REGISTRY. I also engineered a custom algorithm (`encodeModbusFloat`) that dynamically translates massive integers and floating-point decimals into 4-register Modbus Scientific Notation. Additionally, I built an offline simulator using `localStorage` for safe testing and authored the technical documentation.
                     </p>
-                    <h3 class="text-lg text-white font-medium mb-2">Skills Gained</h3>
-                    <ul class="text-gray-400 text-sm space-y-2">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-indigo-400 border border-indigo-400/30 px-2 py-0.5 rounded">Desktop Only App</span>
+                    </div>
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Skills Gained</h3>
+                    <ul class="text-textMuted text-sm space-y-2">
                         <li class="flex items-start"><span class="text-indigo-500 mr-2 mt-0.5">▹</span> <span><strong>Hard Skills:</strong> JavaScript, Offline SPA Architecture, Web Serial API, Modbus RTU Memory Management, Linear Regression Algorithms.</span></li>
                         <li class="flex items-start"><span class="text-indigo-500 mr-2 mt-0.5">▹</span> <span><strong>Soft Skills:</strong> UI/UX Empathy for field technicians, autonomous edge-case debugging, translating complex math into maintainable documentation.</span></li>
                     </ul>
                 </div>
                 <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
-                    <a href="https://dashboard.olpas.tech/tool.html#" target="_blank"> <img src="assets/olpas-app.png" alt="Olpas Calibration App" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500"> </a>
+                    <a href="https://dashboard.olpas.tech/tool.html#" target="_blank" class="block relative"> 
+                        <img src="assets/olpas-app.png" alt="Olpas Calibration App" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500"> 
+                        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-indigo-600/20 backdrop-blur-sm">
+                            <svg class="w-8 h-8 text-white mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            <span class="text-white font-mono text-xs">Open Web App</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </article>
 
         <article class="glass rounded-2xl p-8 md:p-10 border border-surfaceBorder gsap-fade-up">
-            <h2 class="text-2xl font-bold text-white mb-2">IoT Dashboards & Gateway Infrastructure</h2>
+            <h2 class="text-2xl font-bold text-textWhite mb-2">IoT Dashboards & Gateway Infrastructure</h2>
             <div class="flex flex-wrap gap-3 mb-6">
                 <span class="text-xs font-mono text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded">Category: Professional (Olpas)</span>
-                <span class="text-xs font-mono text-gray-400 bg-surface border border-surfaceBorder px-2 py-1 rounded">Systems Administrator</span>
+                <span class="text-xs font-mono text-textMuted bg-surface border border-surfaceBorder px-2 py-1 rounded">Systems Administrator</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 items-center">
                 <div>
-                    <h3 class="text-lg text-white font-medium mb-2">Context & Background</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Context & Background</h3>
+                    <p class="text-textMuted text-sm leading-relaxed mb-4">
                         Olpas required a secure, high-performing data ingestion platform to monitor their IoT sensor fleets. The objective was to maintain a reliable telemetry pipeline while actively optimizing the existing server architecture to handle long-term data storage efficiently, ensure high system availability, and protect against external threats without interrupting live sensor data.
                     </p>
 
-                    <h3 class="text-lg text-white font-medium mb-2">Realisations & Role</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Realisations & Role</h3>
+                    <p class="text-textMuted text-sm leading-relaxed mb-4">
                         Taking over an existing containerized backend stack (Docker, Mosquitto, Node-RED, InfluxDB, Grafana), I served as the Systems Administrator managing critical infrastructure. My key realizations included:
                     </p>
-                    <ul class="text-gray-400 text-sm space-y-3 mb-4">
+                    <ul class="text-textMuted text-sm space-y-3 mb-4">
                         <li class="flex items-start">
                             <span class="text-indigo-500 mr-2 mt-0.5">▹</span>
                             <span><strong>Security & Networking:</strong> Hardened the Linux server using standard firewall utilities (UFW) and bot defenses (Fail2Ban). Resolved internal Docker routing conflicts to bypass public SSL traps and diagnosed UDP packet drops to ensure data integrity.</span>
@@ -158,8 +204,8 @@
                         </li>
                     </ul>
 
-                    <h3 class="text-lg text-white font-medium mb-2">Skills Gained</h3>
-                    <ul class="text-gray-400 text-sm space-y-2">
+                    <h3 class="text-lg text-textWhite font-medium mb-2">Skills Gained</h3>
+                    <ul class="text-textMuted text-sm space-y-2">
                         <li class="flex items-start">
                             <span class="text-indigo-500 mr-2 mt-0.5">▹</span>
                             <span><strong>Hard Skills:</strong> Linux Server Resource Management, InfluxDB Lifecycle/Retention Policies, Security (UFW, Fail2Ban), Docker Subnets, MQTT/Node-RED pipelines.</span>
@@ -170,8 +216,11 @@
                         </li>
                     </ul>
                 </div>
-                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer" onclick="openLightbox('assets/olpas-dashboard.png')">
                     <img src="assets/olpas-dashboard.png" alt="Olpas Grafana Dashboard" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                        <span class="text-white font-mono text-xs border border-white px-3 py-1 rounded-full">Enlarge Image</span>
+                    </div>
                 </div>
             </div>
         </article>
@@ -180,8 +229,61 @@
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/api/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
 <script src="js/main.js"></script>
+<script>
+    // Lightbox Logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const controls = document.getElementById('lightbox-controls');
+
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function openLightbox(src) {
+        lightboxImg.src = src;
+        lightbox.style.display = 'flex';
+        controls.style.display = 'none';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function openGallery(images) {
+        currentGallery = images;
+        currentIndex = 0;
+        updateGalleryImage();
+        lightbox.style.display = 'flex';
+        controls.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function updateGalleryImage() {
+        lightboxImg.src = currentGallery[currentIndex];
+    }
+
+    lightboxClose.onclick = () => {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+
+    lightboxPrev.onclick = (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        updateGalleryImage();
+    };
+
+    lightboxNext.onclick = (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        updateGalleryImage();
+    };
+
+    lightbox.onclick = (e) => {
+        if(e.target === lightbox) lightboxClose.onclick();
+    };
+</script>
 </body>
 </html>
