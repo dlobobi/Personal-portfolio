@@ -47,14 +47,16 @@
             <a href="projects.html" class="text-textMuted hover:text-textWhite transition">Projects</a>
         </div>
         
-        <button id="theme-toggle" class="theme-toggle text-white" aria-label="Toggle Theme">
-            <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-        </button>
+        <div class="magnetic-wrap">
+            <button id="theme-toggle" class="theme-toggle text-white" aria-label="Toggle Theme">
+                <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
     </div>
 </nav>
 
@@ -69,12 +71,18 @@
             <p class="text-indigo-400 font-mono text-sm mb-6">Full-Stack IoT & ACS Student</p>
             <p class="text-textMuted text-sm mb-8">Antwerp region, Belgium.</p>
 
-            <a href="cv.html" class="w-full block text-center px-6 py-3 bg-textWhite text-bgDark text-sm font-medium rounded-lg hover:opacity-90 transition mb-3">
-                View Resumé
-            </a>
-            <a href="assets/CV.pdf" download="CV_Bozhidar_Chobanov.pdf" class="w-full block text-center px-6 py-3 border border-surfaceBorder text-textWhite text-sm font-medium rounded-lg hover:bg-white/5 transition">
-                Download PDF
-            </a>
+            <div class="space-y-3">
+                <div class="magnetic-wrap w-full">
+                    <a href="cv.html" class="w-full block text-center px-6 py-3 bg-textWhite text-bgDark text-sm font-medium rounded-lg hover:opacity-90 transition">
+                        View Resumé
+                    </a>
+                </div>
+                <div class="magnetic-wrap w-full">
+                    <a href="assets/CV.pdf" download="CV_Bozhidar_Chobanov.pdf" class="w-full block text-center px-6 py-3 border border-surfaceBorder text-textWhite text-sm font-medium rounded-lg hover:bg-white/5 transition">
+                        Download PDF
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -88,7 +96,7 @@
                     <span class="font-mono text-sm text-textMuted shrink-0">Oct 2025 - Present</span>
                 </div>
                 <p class="text-indigo-300 font-medium mb-5">Olpas <span class="text-textMuted font-normal ml-1">(Turnhout, Hybrid)</span></p>
-                <p class="text-textMuted leading-relaxed mb-5">
+                <p class="text-textWhite text-lg leading-relaxed mb-5 reveal-text">
                     At Olpas, I manage responsibilities across the entire IoT stack. I am tasked with ensuring high reliability for a global sensor network. My key achievements include:
                 </p>
                 <ul class="space-y-4 text-textMuted text-sm leading-relaxed">
@@ -104,7 +112,7 @@
             <h2 class="text-2xl text-textWhite font-semibold mb-6 border-b border-surfaceBorder pb-4">Education & Trajectory</h2>
             <div class="mb-8">
                 <h3 class="text-xl text-textWhite font-medium mb-2">Why Applied Computer Science?</h3>
-                <p class="text-textMuted leading-relaxed mb-6">
+                <p class="text-textWhite text-lg leading-relaxed mb-6 reveal-text">
                     I chose Applied Computer Science because I wanted to understand exactly how the software we use daily interacts with the hardware that powers it. I am driven by the logic of building systems from the ground up, moving past theoretical concepts and diving straight into hands-on implementation and robust architecture.
                 </p>
 

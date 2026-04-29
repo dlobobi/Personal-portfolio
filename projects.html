@@ -49,14 +49,16 @@
             <a href="projects.html" class="text-textWhite border-b border-textWhite pb-1">Projects</a>
         </div>
 
-        <button id="theme-toggle" class="theme-toggle text-white" aria-label="Toggle Theme">
-            <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-        </button>
+        <div class="magnetic-wrap">
+            <button id="theme-toggle" class="theme-toggle text-white" aria-label="Toggle Theme">
+                <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
     </div>
 </nav>
 
@@ -92,8 +94,8 @@
                         <li><span class="text-indigo-500 mr-2">▹</span> Soft Skills: Client communication, Agile/Scrum methodology, ethical analysis of IT systems.</li>
                     </ul>
                 </div>
-                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer" onclick="openGallery(['assets/project1-1.png', 'assets/project1-2.png', 'assets/project1-3.png'])">
-                    <img src="assets/figma-uml.png" alt="Figma and UML projects" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer tilt-card" onclick="openGallery(['assets/project1-1.png', 'assets/project1-2.png', 'assets/project1-3.png'])">
+                    <img src="assets/figma-uml.png" alt="Figma and UML projects" class="w-full h-auto block group-hover:scale-105 transition duration-500">
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
                         <span class="text-white font-mono text-xs border border-white px-3 py-1 rounded-full">View Gallery (3)</span>
                     </div>
@@ -124,8 +126,8 @@
                         <li><span class="text-indigo-500 mr-2">▹</span> Soft Skills: Technical presentation, substantiating code choices to a client, group cooperation.</li>
                     </ul>
                 </div>
-                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer" onclick="openLightbox('assets/laravel-dashboard.png')">
-                    <img src="assets/laravel-dashboard.png" alt="Laravel Dashboard - Project" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer tilt-card" onclick="openLightbox('assets/laravel-dashboard.png')">
+                    <img src="assets/laravel-dashboard.png" alt="Laravel Dashboard - Project" class="w-full h-auto block group-hover:scale-105 transition duration-500">
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
                         <span class="text-white font-mono text-xs border border-white px-3 py-1 rounded-full">Enlarge Image</span>
                     </div>
@@ -159,9 +161,9 @@
                         <li class="flex items-start"><span class="text-indigo-500 mr-2 mt-0.5">▹</span> <span><strong>Soft Skills:</strong> UI/UX Empathy for field technicians, autonomous edge-case debugging, translating complex math into maintainable documentation.</span></li>
                     </ul>
                 </div>
-                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20">
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 tilt-card">
                     <a href="https://dashboard.olpas.tech/tool.html#" target="_blank" class="block relative"> 
-                        <img src="assets/olpas-app.png" alt="Olpas Calibration App" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500"> 
+                        <img src="assets/olpas-app.png" alt="Olpas Calibration App" class="w-full h-auto block group-hover:scale-105 transition duration-500"> 
                         <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-indigo-600/20 backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                             <span class="text-white font-mono text-xs">Open Web App</span>
@@ -216,8 +218,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer" onclick="openLightbox('assets/olpas-dashboard.png')">
-                    <img src="assets/olpas-dashboard.png" alt="Olpas Grafana Dashboard" class="w-full h-auto block opacity-80 group-hover:opacity-100 transition duration-500">
+                <div class="w-full rounded-lg border border-surfaceBorder overflow-hidden relative group bg-black/20 cursor-pointer tilt-card" onclick="openLightbox('assets/olpas-dashboard.png')">
+                    <img src="assets/olpas-dashboard.png" alt="Olpas Grafana Dashboard" class="w-full h-auto block group-hover:scale-105 transition duration-500">
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
                         <span class="text-white font-mono text-xs border border-white px-3 py-1 rounded-full">Enlarge Image</span>
                     </div>

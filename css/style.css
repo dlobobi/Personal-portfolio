@@ -31,6 +31,76 @@ html, body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #818cf8; /* indigo-400 */
+}
+
+/* Noise Background Overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Custom Cursor (Desktop Only) */
+#cursor {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    display: none;
+}
+
+/* Force hide cursor on everything when custom cursor is active */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+    cursor: none !important;
+}
+
+@media (min-width: 1024px) {
+    #cursor { display: block; }
+}
+
+/* Magnetic Interaction Wrapper */
+.magnetic-wrap {
+    display: inline-block;
+}
+
+/* 3D Tilt Utility */
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease-out;
+}
+
+/* Progressive Reveal Text Base */
+.reveal-text span {
+    opacity: 0.1;
+    display: inline-block;
+    white-space: pre-wrap;
+}
+
 /* --- Lenis Smooth Scrolling --- */
 html.lenis { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto; }
@@ -58,7 +128,7 @@ nav .text-white {
 }
 
 .light nav.mix-blend-difference {
-    mix-blend-difference: unset;
+    mix-blend-mode: normal;
     background: rgba(255, 255, 255, 0.8);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }

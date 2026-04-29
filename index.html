@@ -47,14 +47,16 @@
             <a href="projects.html" class="text-textMuted hover:text-textWhite transition">Projects</a>
         </div>
         
-        <button id="theme-toggle" class="theme-toggle text-white" aria-label="Toggle Theme">
-            <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-        </button>
+        <div class="magnetic-wrap">
+            <button id="theme-toggle" class="theme-toggle text-white" aria-label="Toggle Theme">
+                <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
     </div>
 </nav>
 
@@ -90,7 +92,9 @@
                     As an Applied Computer Science student and a Developer at Olpas, I specialize in the Modbus protocol, DevSecOps, and transforming raw backend data into clean, interactive UIs. I don't just write code, <strong> I ensure it survives in production. </strong>
                 </p>
                 <div class="flex items-center space-x-4">
-                    <a href="about.html" class="px-6 py-3 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-200 transition">Read Full Bio</a>
+                    <div class="magnetic-wrap">
+                        <a href="about.html" class="px-6 py-3 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-200 transition inline-block">Read Full Bio</a>
+                    </div>
                 </div>
             </div>
 
