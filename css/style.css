@@ -95,10 +95,9 @@ html.has-custom-cursor * {
 }
 
 /* Progressive Reveal Text Base */
-.reveal-text span {
+.reveal-text .reveal-char {
     opacity: 0.1;
     display: inline-block;
-    white-space: pre-wrap;
 }
 
 /* --- Lenis Smooth Scrolling --- */

@@ -70,10 +70,17 @@ function initGlobalInteractions() {
     revealTexts.forEach(revealText => {
         if (!revealText.querySelector('span')) {
             const content = revealText.innerText;
-            revealText.innerHTML = content.split('').map(char => `<span>${char}</span>`).join('');
+            // Split by words and spaces to preserve layout while preventing mid-word breaks
+            const words = content.split(/(\s+)/);
+            revealText.innerHTML = words.map(word => {
+                if (word.trim().length === 0) return word;
+                return `<span class="reveal-word" style="display: inline-block; white-space: nowrap;">${
+                    word.split('').map(char => `<span class="reveal-char">${char}</span>`).join('')
+                }</span>`;
+            }).join('');
         }
         
-        gsap.to(revealText.querySelectorAll('span'), {
+        gsap.to(revealText.querySelectorAll('.reveal-char'), {
             opacity: 1,
             stagger: 0.02,
             scrollTrigger: {
