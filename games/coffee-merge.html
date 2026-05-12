@@ -23,11 +23,9 @@
             color: #fff;
             font-family: 'Inter', sans-serif;
             margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            /* Allow scrolling on mobile */
+            overflow-x: hidden;
+            overflow-y: auto;
             touch-action: manipulation;
         }
 
@@ -37,8 +35,9 @@
             gap: 20px;
             max-width: 1400px;
             width: 100%;
-            padding: 0 20px;
-            align-items: center;
+            padding: 20px;
+            margin: 0 auto;
+            align-items: flex-start;
         }
 
         @media (max-width: 1100px) {
@@ -47,10 +46,36 @@
         }
 
         @media (max-width: 768px) {
-            #game-layout { display: flex; flex-direction: column; padding: 0 10px; overflow-y: auto; }
-            #right-panel { order: -1; width: 100%; }
+            #game-layout { 
+                display: flex; 
+                flex-direction: column; 
+                padding: 10px; 
+                align-items: center;
+                gap: 15px;
+            }
+            #right-panel { 
+                order: -1; 
+                width: 100%; 
+                max-width: 440px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            #right-panel .glass-panel {
+                flex: 1;
+                padding: 10px;
+                min-width: 100px;
+            }
+            #right-panel .nav-card {
+                width: 100%;
+                flex: none;
+            }
             #evo-footer { display: flex !important; }
-            #canvas-container { max-width: 100% !important; max-height: 70vh !important; }
+            #canvas-container { 
+                max-width: 100% !important; 
+                max-height: 80vh !important; /* Slightly larger on mobile but still responsive */
+            }
         }
 
         .glass-panel {
@@ -74,7 +99,6 @@
         .evo-item.discovered { opacity: 1; }
         .evo-img { width: 30px; height: 30px; background-size: contain; background-repeat: no-repeat; background-position: center; }
 
-        /* --- FIXED: Correct Responsive Scaling to Remove Invisible Space --- */
         #canvas-container {
             position: relative;
             background: var(--container-bg);
@@ -92,8 +116,7 @@
         canvas { 
             width: 100% !important; 
             height: 100% !important; 
-            display: block;
-            /* Removed object-fit: contain to ensure borders map perfectly */
+            display: block; 
         }
 
         #spawner {
@@ -182,8 +205,8 @@
             <div id="evo-footer" class="hidden glass-panel mt-4 w-full flex-wrap gap-2 justify-center"></div>
         </main>
 
-        <aside id="right-panel" class="flex flex-col gap-4">
-            <div class="glass-panel">
+        <aside id="right-panel">
+            <div class="glass-panel mb-4">
                 <div class="mb-4">
                     <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Score</span>
                     <div id="score" class="text-4xl font-mono font-bold">0</div>
@@ -195,16 +218,16 @@
                 <button onclick="location.reload()" class="mt-6 w-full py-2 border border-white/10 rounded-lg text-[10px] uppercase font-bold tracking-widest hover:bg-white/5 transition font-mono">Restart</button>
             </div>
 
-            <div class="glass-panel flex flex-col items-center">
+            <div class="glass-panel flex flex-col items-center mb-4">
                 <span class="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-2">Next</span>
                 <div id="next-preview" class="w-20 h-20 flex items-center justify-center"></div>
             </div>
 
-            <a href="2048.html" class="glass-panel text-center hover:bg-white/5 transition border-accent/20">
+            <button onclick="window.location.href='2048.html'" class="nav-card w-full glass-panel text-center hover:bg-white/5 transition border-accent/20 mb-4">
                 <span class="text-xs font-bold uppercase tracking-widest text-accent font-mono">Play 2048</span>
-            </a>
+            </button>
             
-            <a href="../index.html" class="text-[10px] uppercase tracking-widest opacity-30 text-center hover:opacity-100 transition font-mono">Home</a>
+            <a href="../index.html" class="nav-card text-[10px] uppercase tracking-widest opacity-30 text-center hover:opacity-100 transition font-mono block w-full">Home</a>
         </aside>
     </div>
 
@@ -259,7 +282,6 @@
             options: { width, height, wireframes: false, background: 'transparent' }
         });
 
-        // Fixed Walls (Offset outward to align inner edges exactly with coordinates 0 and 440)
         const wallThickness = 100;
         const wallOpts = { isStatic: true, friction: 1, frictionStatic: 10, render: { visible: false } };
         Composite.add(engine.world, [
