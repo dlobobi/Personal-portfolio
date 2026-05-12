@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Coffee Merge | Portfolio Games</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --container-bg: #141418;
+            --sidebar-bg: rgba(255, 255, 255, 0.03);
+            --accent: #d946ef;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            touch-action: manipulation;
+        }
+
+        #game-layout {
+            display: grid;
+            grid-template-columns: 200px auto 240px;
+            gap: 20px;
+            max-width: 1400px;
+            width: 100%;
+            padding: 0 20px;
+            align-items: center;
+        }
+
+        @media (max-width: 1100px) {
+            #game-layout { grid-template-columns: 1fr 240px; }
+            #evo-sidebar { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            #game-layout { display: flex; flex-direction: column; padding: 0 10px; overflow-y: auto; }
+            #right-panel { order: -1; width: 100%; }
+            #evo-footer { display: flex !important; }
+            #canvas-container { max-width: 100% !important; max-height: 70vh !important; }
+        }
+
+        .glass-panel {
+            background: var(--sidebar-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .evo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 13px;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+        .evo-item.discovered { opacity: 1; }
+        .evo-img { width: 30px; height: 30px; background-size: contain; background-repeat: no-repeat; background-position: center; }
+
+        /* --- FIXED: Correct Responsive Scaling to Remove Invisible Space --- */
+        #canvas-container {
+            position: relative;
+            background: var(--container-bg);
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: crosshair;
+            overflow: hidden;
+            width: 100%;
+            max-width: 440px;
+            height: auto;
+            aspect-ratio: 44 / 80;
+            max-height: 85vh;
+        }
+
+        canvas { 
+            width: 100% !important; 
+            height: 100% !important; 
+            display: block;
+            /* Removed object-fit: contain to ensure borders map perfectly */
+        }
+
+        #spawner {
+            position: absolute;
+            top: 30px;
+            pointer-events: none;
+            z-index: 10;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: left 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        #deadline {
+            position: absolute;
+            top: 150px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, #ff4b2b, #ff4b2b 10px, transparent 10px, transparent 20px);
+            opacity: 0.1;
+        }
+        #deadline.active { opacity: 1; animation: blink 0.5s infinite; }
+        @keyframes blink { 50% { opacity: 0.3; } }
+
+        #bonus-popup {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.5);
+            background: rgba(217, 70, 239, 0.2);
+            border: 1px solid #d946ef;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px #d946ef;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        @keyframes bonus-in {
+            0% { transform: translateX(-50%) scale(0.5); opacity: 0; }
+            20% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+            30% { transform: translateX(-50%) scale(1); opacity: 1; }
+            80% { transform: translateX(-50%) scale(1); opacity: 1; }
+            100% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+        }
+        .bonus-active { animation: bonus-in 1.5s forwards; }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 12, 0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-layout">
+        <aside id="evo-sidebar" class="glass-panel h-fit">
+            <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 text-accent">Evolution</h3>
+            <div id="evo-list"></div>
+        </aside>
+
+        <main id="game-main" class="flex flex-col items-center justify-center">
+            <div id="canvas-container">
+                <div id="bonus-popup">Bonus Item!</div>
+                <div id="deadline"></div>
+                <div id="spawner"></div>
+                <div id="game-over" class="overlay">
+                    <h2 class="text-3xl font-bold mb-2 text-white">Order Over!</h2>
+                    <p class="text-sm opacity-50 mb-6">Final Score: <span id="final-score">0</span></p>
+                    <button onclick="location.reload()" class="px-8 py-3 bg-white text-black font-bold rounded-xl hover:scale-105 transition">New Order</button>
+                </div>
+            </div>
+            <div id="evo-footer" class="hidden glass-panel mt-4 w-full flex-wrap gap-2 justify-center"></div>
+        </main>
+
+        <aside id="right-panel" class="flex flex-col gap-4">
+            <div class="glass-panel">
+                <div class="mb-4">
+                    <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Score</span>
+                    <div id="score" class="text-4xl font-mono font-bold">0</div>
+                </div>
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">High Score</span>
+                    <div id="high-score" class="text-xl font-mono opacity-80">0</div>
+                </div>
+                <button onclick="location.reload()" class="mt-6 w-full py-2 border border-white/10 rounded-lg text-[10px] uppercase font-bold tracking-widest hover:bg-white/5 transition font-mono">Restart</button>
+            </div>
+
+            <div class="glass-panel flex flex-col items-center">
+                <span class="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-2">Next</span>
+                <div id="next-preview" class="w-20 h-20 flex items-center justify-center"></div>
+            </div>
+
+            <a href="2048.html" class="glass-panel text-center hover:bg-white/5 transition border-accent/20">
+                <span class="text-xs font-bold uppercase tracking-widest text-accent font-mono">Play 2048</span>
+            </a>
+            
+            <a href="../index.html" class="text-[10px] uppercase tracking-widest opacity-30 text-center hover:opacity-100 transition font-mono">Home</a>
+        </aside>
+    </div>
+
+    <script>
+        const SVGS = {
+            bean: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="50" rx="50" ry="50" fill="#3e2723"/><path d="M50 0 C 65 40, 35 60, 50 100" stroke="#2a1b18" stroke-width="5" fill="none"/></svg>`,
+            espresso: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 Q 0 100 50 100 Q 100 100 100 0 Z" fill="#f5f5f5"/><rect x="10" y="10" width="80" height="40" fill="#5d4037"/><path d="M90 20 Q 100 20 100 40 Q 100 60 90 60" stroke="#f5f5f5" stroke-width="10" fill="none"/></svg>`,
+            macchiato: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 Q 0 100 50 100 Q 100 100 100 0 Z" fill="#f5f5f5"/><path d="M0 20 H 100 V 40 Q 100 90 50 90 Q 0 90 0 40 Z" fill="#795548"/><ellipse cx="50" cy="5" rx="40" ry="10" fill="white"/></svg>`,
+            cortado: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 L 100 0 L 90 100 L 10 100 Z" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="5"/><rect x="15" y="50" width="70" height="50" fill="#8d6e63"/><rect x="15" y="20" width="70" height="30" fill="#efebe9"/></svg>`,
+            flatwhite: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 Q 0 100 50 100 Q 100 100 100 0 Z" fill="#f5f5f5"/><path d="M0 20 H 100 V 40 Q 100 90 50 90 Q 0 90 0 40 Z" fill="#a1887f"/><ellipse cx="50" cy="5" rx="45" ry="10" fill="#efebe9"/></svg>`,
+            cappuccino: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 20 Q 0 100 50 100 Q 100 100 100 20 Z" fill="#f5f5f5"/><path d="M50 0 Q 100 0 100 40 L 0 40 Q 0 0 50 0" fill="#fff"/></svg>`,
+            vanillaLatte: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 L 100 0 L 90 100 L 10 100 Z" fill="#f5f5f5"/><path d="M10 40 H 90 V 70 Q 90 95 50 95 Q 10 95 10 70 Z" fill="#fdfcf0"/><ellipse cx="50" cy="5" rx="40" ry="10" fill="#fff9c4"/><circle cx="50" cy="15" r="5" fill="#fdd835" opacity="0.6"/></svg>`,
+            coldbrew: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="0" width="70" height="100" rx="20" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="4"/><rect x="20" y="20" width="60" height="75" rx="15" fill="#212121"/><rect x="30" y="25" width="20" height="20" rx="4" fill="white" opacity="0.3"/><rect x="55" y="45" width="15" height="15" rx="4" fill="white" opacity="0.2"/></svg>`,
+            frappe: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10 30 L 90 30 L 80 100 L 20 100 Z" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="4"/><path d="M10 40 L 95 40 L 90 95 L 10 95 Z" fill="#ffecb3"/><path d="M10 30 Q 10 0 50 0 Q 90 0 90 30" fill="white"/></svg>`,
+            boba: `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20 10 L 80 10 L 70 100 L 30 100 Z" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="3"/><path d="M22 20 L 78 20 L 72 90 L 28 90 Z" fill="#fbbf24"/><circle cx="35" cy="80" r="6" fill="#1e1e1e"/><circle cx="50" cy="85" r="6" fill="#1e1e1e"/><circle cx="65" cy="80" r="6" fill="#1e1e1e"/><rect x="50" y="0" width="6" height="50" fill="#ef4444" transform="rotate(-10 50 25)"/></svg>`
+        };
+
+        const svgToDataUri = (svg) => 'data:image/svg+xml;base64,' + btoa(svg);
+
+        const TYPES = [
+            { label: 'Bean', r: 15, score: 2, tex: svgToDataUri(SVGS.bean) },
+            { label: 'Espresso', r: 25, score: 4, tex: svgToDataUri(SVGS.espresso) },
+            { label: 'Macchiato', r: 35, score: 8, tex: svgToDataUri(SVGS.macchiato) },
+            { label: 'Cortado', r: 42, score: 16, tex: svgToDataUri(SVGS.cortado) },
+            { label: 'Flat White', r: 50, score: 32, tex: svgToDataUri(SVGS.flatwhite) },
+            { label: 'Cappuccino', r: 60, score: 64, tex: svgToDataUri(SVGS.cappuccino) },
+            { label: 'Vanilla Latte', r: 70, score: 128, tex: svgToDataUri(SVGS.vanillaLatte) },
+            { label: 'Cold Brew', r: 85, score: 256, tex: svgToDataUri(SVGS.coldbrew) },
+            { label: 'Frappe', r: 100, score: 512, tex: svgToDataUri(SVGS.frappe) }
+        ];
+
+        const BOBA = { label: 'Boba Tea', r: 40, tex: svgToDataUri(SVGS.boba), isWildcard: true };
+
+        const evoList = document.getElementById('evo-list');
+        const evoFooter = document.getElementById('evo-footer');
+        TYPES.forEach((t, i) => {
+            evoList.innerHTML += `<div class="evo-item" id="evo-${i}"><div class="evo-img" style="background-image:url('${t.tex}')"></div><span>${t.label}</span></div>`;
+            evoFooter.innerHTML += `<div class="evo-img opacity-20" id="foot-evo-${i}" style="background-image:url('${t.tex}')"></div>`;
+        });
+
+        const { Engine, Render, Runner, Bodies, Composite, Events } = Matter;
+        const container = document.getElementById('canvas-container');
+        const width = 440, height = 800, spawnerY = 80;
+
+        const engine = Engine.create();
+        engine.positionIterations = 12;
+        engine.velocityIterations = 8;
+
+        const render = Render.create({
+            element: container,
+            engine: engine,
+            options: { width, height, wireframes: false, background: 'transparent' }
+        });
+
+        // Fixed Walls (Offset outward to align inner edges exactly with coordinates 0 and 440)
+        const wallThickness = 100;
+        const wallOpts = { isStatic: true, friction: 1, frictionStatic: 10, render: { visible: false } };
+        Composite.add(engine.world, [
+            Bodies.rectangle(width/2, height + wallThickness/2, width, wallThickness, wallOpts),
+            Bodies.rectangle(-wallThickness/2, height/2, wallThickness, height, wallOpts),
+            Bodies.rectangle(width + wallThickness/2, height/2, wallThickness, height, wallOpts)
+        ]);
+
+        Render.run(render);
+        Runner.run(Runner.create(), engine);
+
+        let score = 0, highScore = localStorage.getItem('coffee-high-score') || 0, isOver = false, nextIdx = Math.floor(Math.random() * 3), canDrop = true, warnTimer = null;
+        document.getElementById('high-score').textContent = highScore;
+
+        function updateUI() {
+            const isBoba = Math.random() < 0.05;
+            const next = isBoba ? BOBA : TYPES[nextIdx];
+            document.getElementById('next-preview').innerHTML = `<div style="width:50px; height:50px; background-image:url('${next.tex}'); background-size:contain; background-repeat:no-repeat;"></div>`;
+            
+            if (isBoba) {
+                document.getElementById('bonus-popup').classList.add('bonus-active');
+                setTimeout(() => document.getElementById('bonus-popup').classList.remove('bonus-active'), 1500);
+            }
+
+            const spawner = document.getElementById('spawner');
+            const d = next.r * 2;
+            spawner.style.width = d + 'px';
+            spawner.style.height = d + 'px';
+            spawner.style.backgroundImage = `url('${next.tex}')`;
+            spawner.style.top = (spawnerY - next.r) + 'px';
+            spawner.dataset.isBoba = isBoba;
+        }
+
+        let mx = width / 2;
+        window.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const scaleX = width / rect.width;
+            const spawner = document.getElementById('spawner');
+            const isBoba = spawner.dataset.isBoba === 'true';
+            const currentR = isBoba ? BOBA.r : TYPES[nextIdx].r;
+            mx = (e.clientX - rect.left) * scaleX;
+            mx = Math.max(currentR, Math.min(width - currentR, mx));
+            spawner.style.left = (mx - currentR) + 'px';
+        });
+
+        function createCoffee(x, y, i, isBoba = false) {
+            const t = isBoba ? BOBA : TYPES[i];
+            return Bodies.circle(x, y, t.r, {
+                restitution: 0.001,
+                friction: 0.5,
+                frictionStatic: 1.0,
+                density: 0.5,
+                label: t.label,
+                idx: i,
+                isWildcard: isBoba,
+                render: { sprite: { texture: t.tex, xScale: (t.r * 2) / 100, yScale: (t.r * 2) / 100 } }
+            });
+        }
+
+        container.addEventListener('click', () => {
+            if (!canDrop || isOver) return;
+            const spawner = document.getElementById('spawner');
+            const isBoba = spawner.dataset.isBoba === 'true';
+            Composite.add(engine.world, createCoffee(mx, spawnerY, nextIdx, isBoba));
+            canDrop = false; nextIdx = Math.floor(Math.random() * 3);
+            updateUI(); setTimeout(() => canDrop = true, 600);
+        });
+
+        Events.on(engine, 'collisionStart', (e) => {
+            e.pairs.forEach(p => {
+                const a = p.bodyA, b = p.bodyB;
+                if (a.isDel || b.isDel) return;
+
+                if (a.isWildcard || b.isWildcard) {
+                    const wild = a.isWildcard ? a : b;
+                    const other = a.isWildcard ? b : a;
+                    if (other.idx !== undefined && other.idx < TYPES.length - 1) {
+                        wild.isDel = other.isDel = true;
+                        Composite.remove(engine.world, [wild, other]);
+                        Composite.add(engine.world, createCoffee((a.position.x+b.position.x)/2, (a.position.y+b.position.y)/2, other.idx + 1));
+                        score += TYPES[other.idx+1].score;
+                        document.getElementById('score').textContent = score;
+                        document.getElementById(`evo-${other.idx+1}`).classList.add('discovered');
+                        document.getElementById(`foot-evo-${other.idx+1}`).classList.replace('opacity-20', 'opacity-100');
+                        return;
+                    }
+                }
+
+                if (a.label === b.label && a.idx !== undefined) {
+                    const i = a.idx;
+                    if (i < TYPES.length - 1) {
+                        a.isDel = b.isDel = true;
+                        Composite.remove(engine.world, [a, b]);
+                        Composite.add(engine.world, createCoffee((a.position.x+b.position.x)/2, (a.position.y+b.position.y)/2, i+1));
+                        score += TYPES[i+1].score; document.getElementById('score').textContent = score;
+                        document.getElementById(`evo-${i+1}`).classList.add('discovered');
+                        document.getElementById(`foot-evo-${i+1}`).classList.replace('opacity-20', 'opacity-100');
+                    }
+                }
+            });
+        });
+
+        Events.on(engine, 'afterUpdate', () => {
+            if (isOver) return;
+            const bodies = Composite.allBodies(engine.world).filter(b => !b.isStatic);
+            const above = bodies.some(b => b.position.y > 220 && b.bounds.min.y < 150);
+            const line = document.getElementById('deadline');
+            if (above) {
+                if (!warnTimer) { line.classList.add('active'); warnTimer = setTimeout(() => {
+                    isOver = true; document.getElementById('game-over').style.display = 'flex';
+                    document.getElementById('final-score').textContent = score;
+                    if (score > highScore) localStorage.setItem('coffee-high-score', score);
+                }, 3000); }
+            } else { line.classList.remove('active'); clearTimeout(warnTimer); warnTimer = null; }
+        });
+
+        window.onload = () => {
+            updateUI();
+            [0,1,2].forEach(i => {
+                document.getElementById(`evo-${i}`).classList.add('discovered');
+                document.getElementById(`foot-evo-${i}`).classList.replace('opacity-20', 'opacity-100');
+            });
+        };
+    </script>
+</body>
+</html>
